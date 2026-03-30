@@ -1,0 +1,34 @@
+{
+  "name": "font-optimizer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "fonteditor-core": "^2.6.3",
+    "opentype.js": "^1.3.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.x",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/opentype.js": "^1.3.9",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.x",
+    "@vitejs/plugin-react": "^5.2.0",
+    "eslint": "^9.x",
+    "eslint-plugin-react-hooks": "^5.x",
+    "eslint-plugin-react-refresh": "^0.4.x",
+    "globals": "^15.x",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.x",
+    "vite": "^6.4.1"
+  }
+}
