@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+# font-utilizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web tool for processing and optimizing fonts.
 
 Currently, two official plugins are available:
 
