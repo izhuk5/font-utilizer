@@ -4,7 +4,7 @@ import { Font, woff2 } from 'fonteditor-core'
 const woff2WasmUrl = '/woff2.wasm'
 
 export const DEFAULT_CHARSET =
-  `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-'?!$#@%&"'""''«»„`
+  `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-'?!$#@%&©"'""''«»„`
 
 export interface SubsetResult {
   originalSize: number
