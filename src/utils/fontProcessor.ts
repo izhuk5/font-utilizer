@@ -1,5 +1,5 @@
 // @ts-ignore - fonteditor-core has partial types
-import { Font, woff2 } from 'fonteditor-core'
+import { Font, woff2, woff2ttf } from 'fonteditor-core'
 
 const woff2WasmUrl = '/woff2.wasm'
 
@@ -40,6 +40,20 @@ function detectFontType(buffer: ArrayBuffer): 'ttf' | 'otf' | 'woff' | 'woff2' {
   return 'ttf'
 }
 
+// fonteditor-core always reads unwrapped WOFF/WOFF2 as TTF, which fails with
+// "ttf file damaged" for CFF-flavored fonts. Unwrap first, then re-detect.
+function toSfnt(buffer: ArrayBuffer): { buffer: ArrayBuffer; type: 'ttf' | 'otf' } {
+  const type = detectFontType(buffer)
+  if (type === 'woff2') {
+    const decoded: Uint8Array = woff2.decode(buffer)
+    return toSfnt(decoded.slice().buffer as ArrayBuffer)
+  }
+  if (type === 'woff') {
+    return toSfnt(woff2ttf(buffer))
+  }
+  return { buffer, type }
+}
+
 export async function processFont(
   buffer: ArrayBuffer,
   characters: string,
@@ -47,10 +61,10 @@ export async function processFont(
   await ensureWoff2()
 
   const subset = getSubsetCodepoints(characters)
-  const fontType = detectFontType(buffer)
+  const sfnt = toSfnt(buffer)
 
-  const font = Font.create(buffer, {
-    type: fontType,
+  const font = Font.create(sfnt.buffer, {
+    type: sfnt.type,
     subset,
     hinting: false,
     kerning: false,
